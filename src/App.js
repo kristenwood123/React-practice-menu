@@ -4,13 +4,11 @@ import Categories from './Categories';
 import items from './data';
 import './index.css'
 
-const allCategories = new Set(items.map((item) => item.category))
-console.log(allCategories)
-
+const allCategories = ['all', ...new Set(items.map((item) => item.category))]
 
 function App() {
   const [menuItems, setMenuItems] = useState(items)
-  const [categories, setCategories] = useState([])
+  const [categories, setCategories] = useState(allCategories)
 
   const filterItems = (category) => {
     // this filters through the array and checks each item element
@@ -30,7 +28,7 @@ function App() {
         <h2>Our Menu</h2>
         <div className="underline"></div>
       </div>
-      <Categories filterItems={filterItems}/>
+      <Categories filterItems={filterItems} categories={categories}/>
       <Menu items={menuItems}/>
     </section>
   </main>
